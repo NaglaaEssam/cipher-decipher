@@ -1,69 +1,88 @@
+// Title: Memory Matching Game
 #include <iostream>
 
 using namespace std;
+const int row=4;
+const int col=4;
 
 int main()
 {
-    cout<<"Ahlan Ya User Ya Habibi"<<endl;
-    cout<<"what do you want to do today"<<endl;
-    cout<<"1-cipher a message"<<endl;
-    cout<<"2-decipher a message"<<endl;
-    cout<<"3-end"<<endl;
-    string newword="";
-    string n_word="";
-    int num;
-    cout<<"enter a num :";
-    cin>>num;
-    if(num==1){
-            cout<<"please enter the massage to cipher:";
-            string word;
-            cin.ignore();
-            getline(cin,word);
-             for(int i=0;i<word.length();i++){
-                   if((int(word[i])>=65&&int(word[i])<=77)||(int(word[i])>=97&&int(word[i])<=109)){
-                         newword+=char(int(word[i])+13);
-                     }
-                     else if(int(word[i]==32)){
-                             newword+=char(32);
+    char mat[][col]= {{'8','2','3','4'},{'2','8','4','1'},{'3','1','7','5'},{'7','6','6','5'}};
+    char arr[row][col]= {{'*','*','*','*'},{'*','*','*','*'},{'*','*','*','*'},{'*','*','*','*'}};
+    int var1,var2,var3,var4;
+    cout<<" Start Game "<<endl;
+    cout<<endl;
+    for(int i=0; i<row; i++) //this loop to show star when you start game
+    {
+        for(int j=0; j<col; j++)
+        {
 
-                     }
-                    else
-                      newword+=char(int(word[i])-13);
-               }
-              cout<<"the cipher massage is :"<<newword<<endl;
+            cout<<"*";
+        }
+        cout<<endl;
     }
-    else if(num==2){
-              cout<<"please enter the massage to decipher:";
-              string word;
-              cin.ignore();
-              getline(cin,word);
-             for(int i=0;i<word.length();i++){
-                   if((int(word[i])>=65&&int(word[i])<=77)||(int(word[i])>=97&&int(word[i])<=109)){
-                         newword+=char(int(word[i])+13);
-                     }
-                     else if(int(word[i]==32)){
-                             newword+=char(32);
-                     }
-                    else
-                      newword+=char(int(word[i])-13);
-               }
-              cout<<newword<<endl;
 
-             for(int j=0;j<newword.length();j++){
-                    if((int(newword[j])>=78&&int(newword[j])<=90)||(int(newword[j])>=110&&int(newword[j])<=122)){
-                         n_word+=char(int(newword[j])-13);
+    for(int i=0; i<row-2; i++)
+    {
+        for(int j=0; j<col; j++)
+        {
+            cout<<i << j<<"time"<<endl;
+            cout<<" Enter first index"<<endl;
+            cin>>var1;
+            cin>>var2;
+            cout<<" Enter second index"<<endl;
+            cin>>var3;
+            cin>>var4;
+            while(mat[var1][var2]!=mat[var3][var4]) //this loop know if two indices not equal ,the stars will shown and you will input new indices until you write right indices
+            {
+                for(int i=0; i<row; i++)
+                {
+                    for(int j=0; j<col; j++)
+                    {
+                        cout<<"*";
                     }
-                     else if(int(newword[j]==32)){
-                             n_word+=char(32);
-                     }
-                    else
+                    cout<<endl;
+                }
+                cout<<"Enter first index again"<<endl;
+                cin>>var1;
+                cin>>var2;
+                cout<<"Enter second index again"<<endl;
+                cin>>var3;
+                cin>>var4;
 
-                     n_word+=char(int(newword[j])+13);
-      }
-      cout<<"the decipher massage is :"<< n_word<<endl;
+            }
+            cout<<endl;
+            cout<<"Now the matrix is "<<endl;
+            for(int k=0; k<row; k++) //this loop to output the content of second indix plus content of first indix
+            {
+                for(int m=0; m<col; m++)
+
+                {
+                    if((mat[k][m]==mat[var1][var2])&&(mat[k][m]==mat[var3][var4])) //check if the content of two indices are equal
+                    {
+                        arr[k][m]=mat[var1][var2]; //pass the value from 2d array of numbers to 2d array of stars
+                        for(int l=0; l<row; l++)
+                        {
+                            for(int n=0; n<col; n++)
+                            {
+                                cout<<arr[l][n]<<" ";  //print content of first indix and the rest will be stars
+
+                            }
+
+                            cout<<endl;
+                        }
+                        cout<<"////////"<<endl;
+                    }
+
+                }
+                cout<<endl;
+
+            }
+
+        }
     }
-    else
-        cout<<"end the program"<<endl;
+    cout<<" Now the game is finished "<<endl;
+
 
     return 0;
 }
